@@ -4,7 +4,7 @@ from django.db import models
 from mptt.models import MPTTModel,TreeForeignKey
 
 from wepost.apps.auth.models import WepostUser
-from wepost.base.models import BaseModel
+from wepost.base.models import BaseModel, BaseReactStatMixin
 from wepost.vendors.django_archive_mixin.mixins import SoftDeleteMixin
 
 
@@ -34,7 +34,7 @@ class Node(MPTTModel,BaseModel):
     return self.name
 
 
-class Post(BaseModel,SoftDeleteMixin):
+class Post(BaseModel, SoftDeleteMixin, BaseReactStatMixin):
   # 显示指定主键 设计成 uuid 是为了避免被直接遍历爬取
   id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
   node = models.ForeignKey(Node, verbose_name="节点", on_delete=models.PROTECT)
@@ -48,11 +48,7 @@ class Post(BaseModel,SoftDeleteMixin):
   last_reply_by = models.CharField("最后回复人",max_length=150, blank=True, default='')
   last_touched = models.DateTimeField(auto_now=True, verbose_name='最后活跃')
   reply_count = models.PositiveIntegerField("回复数", default=0)
-  # 统计相关数据
-  like_count = models.PositiveIntegerField("喜欢数", default=0)
-  dislike_count = models.PositiveIntegerField("不喜欢数", default=0)
-  fav_count = models.PositiveIntegerField("收藏数", default=0)
-  share_count = models.PositiveIntegerField("分享数", default=0)
+  # 统计相关数据, 基本反应数据继承自 BaseReactStatMixin
   member_view_count = models.PositiveIntegerField("会员浏览数", default=0)
   other_view_count = models.PositiveIntegerField("网页浏览数", default=0)
 
@@ -62,3 +58,20 @@ class Post(BaseModel,SoftDeleteMixin):
 
   def __str__(self):
     return self.title
+
+
+class Reply(MPTTModel, BaseModel, SoftDeleteMixin, BaseReactStatMixin):
+  ref = TreeForeignKey('self', null=True, blank=True, related_name="replies", on_delete=models.SET_NULL,
+                       verbose_name="引用")
+  creator = models.ForeignKey(WepostUser, verbose_name="回复人", on_delete=models.PROTECT)
+  content = models.TextField("内容", max_length=4096)
+  content_rendered = models.TextField("渲染内容", max_length=8192, default='')
+  #
+  creator_name = models.CharField("回复人名", max_length=150)  # 冗余数据
+  reply_from = models.CharField("回复人来源", max_length=64, help_text="用户来源地点等信息")
+  reply_ip = models.GenericIPAddressField("回复IP")
+
+  # 统计相关数据, 基本反应数据继承自 BaseReactStatMixin
+  class Meta:
+    verbose_name = "回复"
+    verbose_name_plural = verbose_name

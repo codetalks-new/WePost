@@ -11,6 +11,17 @@ class CreatedUpdatedMixin(models.Model):
   class Meta:
     abstract = True
 
+
+class BaseReactStatMixin(models.Model):
+  # 基本反馈统计相关数据
+  like_count = models.PositiveIntegerField("喜欢数", default=0)
+  dislike_count = models.PositiveIntegerField("不喜欢数", default=0)
+  fav_count = models.PositiveIntegerField("收藏数", default=0)
+  share_count = models.PositiveIntegerField("分享数", default=0)
+
+  class Meta:
+    abstract = True
+
 class BaseModel(CreatedUpdatedMixin):
   class Meta:
     abstract = True
