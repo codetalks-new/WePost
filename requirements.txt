@@ -1,0 +1,21 @@
+django>=2.2b1
+openpyxl>=2.5.9 # xlsx read write
+attrs>=18.2.0 # for dataclass
+gunicorn # for prod deploy
+django-mptt==0.9.1 # hiearchy tree
+#############
+### admin
+#############
+django-jet==1.0.8 # admin ui
+#############
+### dev
+#############
+django-livereload-server # for dev
+django-debug-toolbar==1.11 # for dev
+#############
+### test
+#############
+pytest # for test
+pytest-django # for test
+
+
