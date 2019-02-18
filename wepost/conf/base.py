@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mptt',
+    'wepost.apps.auth.apps.AuthConfig'
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# User
+AUTH_USER_MODEL = "wepost_auth.WepostUser"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

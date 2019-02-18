@@ -17,15 +17,12 @@ from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from wepost.apps.parts_plugin import  api as parts_plugin_api
 
 
 urlpatterns = [
-    #path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('jet/', include('jet.urls')), # grappelli URLS
     # path('accounts/', include('django.contrib.auth.urls')),
     url(r"^min/", admin.site.urls),
-    path('api/parts_plugin/', include((parts_plugin_api.urlpatterns,"parts_plugin_api")))
 ]
 
 if settings.DEBUG:
