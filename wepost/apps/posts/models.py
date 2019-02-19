@@ -73,6 +73,8 @@ class Reply(MPTTModel, BaseModel, SoftDeleteMixin, BaseReactStatMixin):
   creator_name = models.CharField("回复人名", max_length=150)  # 冗余数据
   reply_from = models.CharField("回复人来源", max_length=64, help_text="用户来源地点等信息")
   reply_ip = models.GenericIPAddressField("回复IP")
+  # 运营相关
+  order = models.IntegerField("排序", default=0)
 
   # 统计相关数据, 基本反应数据继承自 BaseReactStatMixin
   class Meta:
