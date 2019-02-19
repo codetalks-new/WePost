@@ -63,6 +63,7 @@ class Post(BaseModel, SoftDeleteMixin, BaseReactStatMixin):
 
 
 class Reply(MPTTModel, BaseModel, SoftDeleteMixin, BaseReactStatMixin):
+  post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="主题")
   ref = TreeForeignKey('self', null=True, blank=True, related_name="replies", on_delete=models.SET_NULL,
                        verbose_name="引用")
   creator = models.ForeignKey(WepostUser, verbose_name="回复人", on_delete=models.PROTECT)
