@@ -4,6 +4,7 @@ from django.db import models
 from mptt.models import MPTTModel,TreeForeignKey
 
 from wepost.apps.auth.models import WepostUser
+from wepost.apps.posts.enums import PostState
 from wepost.base.models import BaseModel, BaseReactStatMixin
 from wepost.vendors.django_archive_mixin.mixins import SoftDeleteMixin
 
@@ -42,6 +43,7 @@ class Post(BaseModel, SoftDeleteMixin, BaseReactStatMixin):
   title = models.CharField("标题", max_length=128)
   content = models.TextField("内容",max_length=40960)
   content_rendered = models.TextField("渲染内容",max_length=81920, default='')
+  state = models.SmallIntegerField("状态", choices=PostState.choices(), default=PostState.DRAFT)
   # 运营相关
   order = models.IntegerField("排序",default=0)
   # 回复相关冗余

@@ -7,7 +7,7 @@ from django.db.models.fields.files import ImageFieldFile, FieldFile
 from django.forms import model_to_dict
 from django.http import JsonResponse
 
-from .enum_utils import IntEnum, StrEnum
+from .enum_ex import IntEnum, StrEnum
 
 
 class MyJSONEncoder(DjangoJSONEncoder):
