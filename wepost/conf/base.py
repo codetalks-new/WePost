@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mptt',
     'wepost.apps.auth.apps.AuthConfig',
-    'wepost.apps.posts.apps.PostsConfig'
+    'wepost.apps.posts.apps.PostsConfig',
+    'wepost.apps.wallets.apps.WalletsConfig'
 ]
 
 MIDDLEWARE = [
