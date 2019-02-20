@@ -4,7 +4,7 @@ from django.db import models
 from mptt.models import MPTTModel,TreeForeignKey
 
 from wepost.apps.auth.models import WepostUser
-from wepost.apps.posts.enums import PostState
+from wepost.apps.posts.enums import PostState, UserNodeStarState
 from wepost.base.models import BaseModel, BaseReactStatMixin
 from wepost.vendors.django_archive_mixin.mixins import SoftDeleteMixin
 
@@ -33,6 +33,19 @@ class Node(MPTTModel,BaseModel):
 
   def __str__(self):
     return self.name
+
+
+class UserNodeStar(BaseModel):
+  user = models.ForeignKey(WepostUser, on_delete=models.CASCADE, verbose_name="用户")
+  node = models.ForeignKey(Node, on_delete=models.CASCADE, verbose_name="节点")
+  order = models.IntegerField("排序", default=0, help_text="用于排序关注显示顺序")
+  state = models.PositiveSmallIntegerField("状态", choices=UserNodeStarState.choices(),
+                                           default=UserNodeStarState.FOLLOWING)
+
+  class Meta:
+    verbose_name = "关注节点"
+    verbose_name_plural = verbose_name
+    unique_together = ("user", "node")
 
 
 class Post(BaseModel, SoftDeleteMixin, BaseReactStatMixin):
