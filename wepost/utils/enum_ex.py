@@ -2,7 +2,7 @@
 from enum import Enum
 
 
-class ChoiceEnum(Enum):
+class EnumChoiceMixin:
     @property
     def label(self):
         return self.name
@@ -12,14 +12,17 @@ class ChoiceEnum(Enum):
         return [(it.value, it.label) for it in list(cls)]
 
 
-class StrEnum(str, ChoiceEnum):
+# 注意顺序 ：
+# new enumerations should be created as `EnumName([mixin_type, ...] [data_type,] enum_type)`
+
+class StrEnum(EnumChoiceMixin, str, Enum):
     """is a str and a enum"""
 
     def __str__(self):
         return self.value
 
 
-class IntEnum(int, ChoiceEnum):
+class IntEnum(EnumChoiceMixin, int, Enum):
     """is a int and a enum"""
 
     def __str__(self):

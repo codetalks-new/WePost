@@ -1,5 +1,6 @@
 # coding: utf-8
-from wepost.utils.enum_ex import IntEnum
+from wepost.utils.enum_ex import IntEnum, EnumChoiceMixin
+from enum import Flag, IntFlag
 
 __author__ = '代码会说话'
 
