@@ -40,11 +40,13 @@ class BillCategory(IntEnum):
   CHECK_IN = 101  # 每日登录签到随机送金币：+（1~50铜币）
   ACTIVE_IN = 102  # 每日活跃度送金币：+(1~50铜币)
   REPLY_IN = 110  # 创建的主题收到回复： +（5+ 铜币)
-  LIKE_IN = 111  # 收到感谢：+10铜币
+  LIKE_REPLY_IN = 111  # 收到回复感谢：+10铜币
+  LIKE_POST_IN = 112  # 收到主题感谢：+15铜币
 
   CREATE_POST_COST = 201  # 创建主题： - (20 + 25 *字符数/1000 铜币)
   CREATE_REPLY_COST = 202  # 创建回复: -(5+25 * 字符/1000 铜币)
-  LIKE_COST = 211  # 发送感谢: -10 铜币
+  LIKE_REPLY_COST = 211  # 发送感谢: -10 铜币
+  LIKE_POST_COST = 212  # 发送感谢: -15 铜币
 
   @property
   def label(self):
@@ -55,8 +57,10 @@ _bill_category_to_text = {
   BillCategory.CHECK_IN: "每日登录奖励",
   BillCategory.ACTIVE_IN: "每日活跃度奖励",
   BillCategory.REPLY_IN: "主题回复收益",
-  BillCategory.LIKE_IN: "收到谢意",
+  BillCategory.LIKE_REPLY_IN: "收到回复谢意",
+  BillCategory.LIKE_POST_IN: "收到主题谢意",
   BillCategory.CREATE_POST_COST: "创建主题",
   BillCategory.CREATE_REPLY_COST: "创建回复",
-  BillCategory.LIKE_COST: "发送谢意",
+  BillCategory.LIKE_REPLY_COST: "发送回复谢意",
+  BillCategory.LIKE_POST_COST: "发送主题谢意",
 }
