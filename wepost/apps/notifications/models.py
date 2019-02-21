@@ -15,8 +15,9 @@ class Notification(BaseModel):
   level = models.PositiveSmallIntegerField("级别", choices=NotificationLevel.choices(), default=NotificationLevel.INFO)
   unread = models.BooleanField("未读", db_index=True,default=True)
   # 配置泛型 actor 外键关联
-  actor_content_type = models.ForeignKey(ContentType, related_name="notify_actor", on_delete=models.CASCADE)
-  actor_object_id = models.CharField(max_length=255)
+  actor_content_type = models.ForeignKey(ContentType, blank=True, null=True, related_name="notify_actor",
+                                         on_delete=models.CASCADE)
+  actor_object_id = models.CharField(max_length=255, blank=True, null=True)
   actor = GenericForeignKey('actor_content_type', 'actor_object_id')
 
   # 配置事件发生范围,如果是指发帖子的话，可以认为是关联到对应节点.
