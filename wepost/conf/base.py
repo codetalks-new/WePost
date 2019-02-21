@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'mptt',
     'wepost.apps.auth.apps.AuthConfig',
     'wepost.apps.posts.apps.PostsConfig',
-    'wepost.apps.wallets.apps.WalletsConfig'
+    'wepost.apps.wallets.apps.WalletsConfig',
     'wepost.apps.sns.apps.SnsConfig',
     'wepost.apps.notifications.apps.NotificationsConfig'
 ]

@@ -19,10 +19,10 @@ class Wallet(BaseModel,SoftDeleteMixin):
 
 
 class Bill(BaseModel,SoftDeleteMixin):
-  user = models.ForeignKey(WepostUser,on_delete=models.PROTECT,verbose_name="所属用户")
+  user = models.ForeignKey(WepostUser, on_delete=models.PROTECT, verbose_name="所属用户")
   direction = models.PositiveSmallIntegerField("收支方向",choices=BillDirection.choices())
   # 对于收到谢意类型则记录对应发送用户
-  from_user = models.ForeignKey(WepostUser, null=True, on_delete=models.PROTECT,verbose_name="来源用户")
+  from_user = models.ForeignKey(WepostUser, null=True, on_delete=models.PROTECT, verbose_name="来源用户", related_name="+")
   category = models.PositiveSmallIntegerField("收支类别",choices=BillCategory.choices())
   amount = models.DecimalField("数额", max_digits=17, decimal_places=2)
   current_balance = models.DecimalField("当前余额",max_digits=17, decimal_places=2, default=0)

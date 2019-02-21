@@ -18,7 +18,7 @@ class Node(MPTTModel,BaseModel):
   brief = models.CharField("简介", max_length=512, blank=True, null=True)
   order = models.IntegerField("排序值", default=0)
   # 统计相关数据
-  star_count = models.PositiveIntegerField("收藏数",default=0)
+  star_count = models.PositiveIntegerField("关注数", default=0)
   post_count = models.PositiveIntegerField("主题数",default=0)
 
   class Meta:
