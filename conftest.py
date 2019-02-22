@@ -46,14 +46,14 @@ def node_flask():
 
 @pytest.fixture()
 def node_js():
-    return Node.objects.filter(code="javascript")
+    return Node.objects.filter(code="javascript").first()
 
 
 @pytest.fixture()
 def node_vue(db):
-    return Node.objects.filter(code="vue")
+    return Node.objects.filter(code="vue").first()
 
 
 @pytest.fixture()
 def node_c(db):
-    return Node.objects.filter(code="c")
+    return Node.objects.filter(code="c").first()

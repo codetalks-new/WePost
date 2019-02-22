@@ -12,10 +12,11 @@ class UserNodeService:
   def __init__(self, user: WepostUser):
     self.user = user
 
-  def _update_star_state(self, node: Node, star_state: UserNodeStarState):
+  def _update_star_state(self, node: Node, state: UserNodeStarState):
     """更新关注状态"""
-    obj, created = UserNodeStar.objects.update_or_create(user=self.user, node=node, state=star_state)
+    obj, created = UserNodeStar.objects.update_or_create(user=self.user, node=node, state=state)
     return obj, created
+
 
   def _delete_node(self, node: Node):
     """移除跟某一节点关系"""
@@ -36,3 +37,14 @@ class UserNodeService:
   def unblock_node(self, node: Node):
     """取消屏蔽节点"""
     return self._delete_node(node)
+
+  def _check_star_state(self, node: Node, state: UserNodeStarState):
+    return UserNodeStar.objects.filter(user=self.user, node=node, state=state).exists()
+  
+  def has_star(self, node: Node):
+    """是否已关注"""
+    return self._check_star_state(node, UserNodeStarState.FOLLOWING)
+
+  def has_block(self, node: Node):
+    """是否已屏蔽"""
+    return self._check_star_state(node, UserNodeStarState.BLOCKING)
