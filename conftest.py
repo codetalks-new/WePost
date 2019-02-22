@@ -2,12 +2,58 @@ import os
 
 import pytest
 
+from wepost.apps.auth.models import WepostUser
+from wepost.apps.posts.models import Node
 
-@pytest.fixture(scope='session')
-def django_db_setup():
-    from django.conf import settings
 
-    settings.DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(settings.BASE_DIR, 'db.sqlite3'),
-    }
+### 用户 pytest fixtures
+
+@pytest.fixture()
+def ut1(db):
+    return WepostUser.objects.filter(username="test1").first()
+
+
+@pytest.fixture()
+def ut2(db):
+    return WepostUser.objects.filter(username="test2").first()
+
+
+@pytest.fixture()
+def ut3(db):
+    return WepostUser.objects.filter(username="test3").first()
+
+
+@pytest.fixture()
+def ut4(db):
+    return WepostUser.objects.filter(username="test4").first()
+
+
+@pytest.fixture()
+def ut5(db):
+    return WepostUser.objects.filter(username="test5").first()
+
+
+### 节点 pytest fixtures
+@pytest.fixture()
+def node_py():
+    return Node.objects.filter(code="python").first()
+
+
+@pytest.fixture()
+def node_flask():
+    return Node.objects.filter(code="flask").first()
+
+
+@pytest.fixture()
+def node_js():
+    return Node.objects.filter(code="javascript")
+
+
+@pytest.fixture()
+def node_vue(db):
+    return Node.objects.filter(code="vue")
+
+
+@pytest.fixture()
+def node_c(db):
+    return Node.objects.filter(code="c")
