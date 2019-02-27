@@ -1,5 +1,5 @@
 # coding: utf-8
-from wepost.utils.enum_ex import IntEnum, EnumChoiceMixin
+from wepost.utils.enum_ex import IntEnum, EnumChoiceMixin, StrEnum
 from enum import Flag, IntFlag
 
 __author__ = '代码会说话'
@@ -34,3 +34,9 @@ _post_state_to_text = {
   PostState.DRAFT: "草稿",
   PostState.PUBLISHED: "已发布",
 }
+
+
+class UserNodeSortType(StrEnum):
+  CREATED = "created"
+  UPDATED = "updated"
+  ACTIVE_DEGREE = "active_degree"
