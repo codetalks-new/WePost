@@ -21,7 +21,7 @@ class Node(MPTTModel,BaseModel):
   star_count = models.PositiveIntegerField("关注数", default=0)
   post_count = models.PositiveIntegerField("主题数",default=0)
 
-  users = models.ManyToManyField(WepostUser, through='UserNodeStar', through_fields=('node', 'user'))
+  users = models.ManyToManyField(WepostUser, symmetrical=False, through='UserNodeStar', through_fields=('node', 'user'))
 
   class Meta:
     verbose_name = "节点"

@@ -136,3 +136,4 @@ dist.tar.gz
 .vscode/tags
 
 test_db.sqlite3
+playground.*

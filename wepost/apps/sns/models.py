@@ -7,8 +7,9 @@ from wepost.base.models import BaseModel
 
 
 class UserRelation(BaseModel):
-  from_user = models.ForeignKey(WepostUser, on_delete=models.CASCADE, verbose_name="用户", related_name="fan")
-  to_user = models.ForeignKey(WepostUser, on_delete=models.CASCADE, verbose_name="目标用户", related_name="idol")
+  from_user = models.ForeignKey(WepostUser, on_delete=models.CASCADE, verbose_name="用户",
+                                related_name="userrelation_from", )
+  to_user = models.ForeignKey(WepostUser, on_delete=models.CASCADE, verbose_name="目标用户", related_name="userrelation_to")
   state = models.PositiveSmallIntegerField("状态", choices=UserRelationState.choices())
 
   class Meta:

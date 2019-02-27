@@ -33,6 +33,11 @@ def ut5(db):
     return WepostUser.objects.filter(username="test5").first()
 
 
+@pytest.fixture()
+def ut6(db):
+    return WepostUser.objects.filter(username="test6").first()
+
+
 ### 节点 pytest fixtures
 @pytest.fixture()
 def node_py():
