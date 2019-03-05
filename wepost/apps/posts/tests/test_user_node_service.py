@@ -37,6 +37,11 @@ def test_query_nodes(ut1, node_c, node_py, node_js, node_flask, node_vue):
     service.star_node(node)
   service.block_node(node_vue)
 
+  reversed_accessed_nodes = ut1.star_or_followed_node_set.all()
+  s1 = set(reversed_accessed_nodes)
+  s2 = set(nodes + [node_vue])
+  assert s1 == s2
+
   ret_nodes1 = list(service.query_star_nodes())
   assert len(ret_nodes1) == len(nodes)
   ret_nodes1.reverse()

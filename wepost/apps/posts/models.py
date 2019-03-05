@@ -21,8 +21,11 @@ class Node(MPTTModel,BaseModel):
   star_count = models.PositiveIntegerField("关注数", default=0)
   post_count = models.PositiveIntegerField("主题数",default=0)
 
-  users = models.ManyToManyField(WepostUser, symmetrical=False, through='UserNodeStar', through_fields=('node', 'user'))
+  users = models.ManyToManyField(WepostUser, symmetrical=False, through='UserNodeStar', through_fields=('node', 'user'),
+                                 related_name="star_or_followed_node_set")
 
+  moderators = models.ManyToManyField(WepostUser, symmetrical=False, through='NodeModeratorRelation',
+                                      through_fields=('node', 'moderator'), related_name="moderated_node_set")
   class Meta:
     verbose_name = "节点"
     verbose_name_plural = verbose_name
@@ -35,6 +38,13 @@ class Node(MPTTModel,BaseModel):
 
   def __str__(self):
     return self.name
+
+
+class NodeModeratorRelation(BaseModel):
+  """节点及管理员关联中间表"""
+  node = models.ForeignKey(Node, on_delete=models.CASCADE, verbose_name="节点")
+  moderator = models.ForeignKey(WepostUser, on_delete=models.CASCADE, verbose_name="管理员")
+  memo = models.CharField("备注", max_length=128, blank=True, default='')
 
 
 class UserNodeStar(BaseModel):

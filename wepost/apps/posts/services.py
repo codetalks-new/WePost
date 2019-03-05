@@ -3,7 +3,7 @@ from django.db.models import QuerySet, Q
 
 from wepost.apps.auth.models import WepostUser
 from wepost.apps.posts.enums import UserNodeStarState, UserNodeSortType
-from wepost.apps.posts.models import Node, UserNodeStar
+from wepost.apps.posts.models import Node, UserNodeStar, NodeModeratorRelation
 from wepost.utils.sort import SortField, SortDirection
 
 __author__ = '代码会说话'
@@ -60,7 +60,7 @@ class UserNodeService:
       sort = SortField("updated", SortDirection.DESC)
     else:
       sort = SortField("usernodestar__created", SortDirection.DESC)
-    node_set = self.user.node_set
+    node_set = self.user.star_or_followed_node_set
     qs = node_set.all().filter(usernodestar__state=state).order_by(sort.ordering)
     if keyword:
       qs = qs.filter(Q(name__icontains=keyword) | Q(brief__icontains=keyword))
@@ -73,3 +73,11 @@ class UserNodeService:
   def query_blocked_nodes(self, keyword: str = None):
     """查询已屏蔽的节点"""
     return self._query_related_nodes(UserNodeStarState.BLOCKING, keyword=keyword)
+
+
+class NodeModeratorService:
+  def __init__(self, node: Node):
+    self.node = node
+
+  def is_moderator(self, user: WepostUser):
+    return NodeModeratorRelation.objects.filter(moderator=user, node=self.node).exists()
