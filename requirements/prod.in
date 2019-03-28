@@ -1,0 +1,2 @@
+-r common.in
+gunicorn==19.9.0 # for prod deploy

@@ -1,0 +1,9 @@
+django==2.2b1
+openpyxl==2.6.0 # xlsx read write
+attrs==18.2.0 # for dataclass
+django-mptt==0.9.1 # hiearchy tree
+#############
+### admin
+#############
+django-jet==1.0.8 # admin ui
+#############

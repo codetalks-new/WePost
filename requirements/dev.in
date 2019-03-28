@@ -1,12 +1,4 @@
-django==2.2b1
-openpyxl==2.6.0 # xlsx read write
-attrs==18.2.0 # for dataclass
-gunicorn==19.9.0 # for prod deploy
-django-mptt==0.9.1 # hiearchy tree
-#############
-### admin
-#############
-django-jet==1.0.8 # admin ui
+-r common.in
 #############
 ### dev
 #############
@@ -19,4 +11,7 @@ pytest==4.2.1 # for test
 pytest-django==3.4.7 # for test
 pytest-cov==2.6.1 # for test
 
-
+############
+### chore
+############
+pip-tools==3.5.0
