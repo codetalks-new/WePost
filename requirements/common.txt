@@ -8,7 +8,7 @@ attrs==18.2.0
 django-jet==1.0.8
 django-js-asset==1.2.2    # via django-mptt
 django-mptt==0.9.1
-django==2.2b1
+django==2.2rc1
 et-xmlfile==1.0.1         # via openpyxl
 jdcal==1.4                # via openpyxl
 openpyxl==2.6.0

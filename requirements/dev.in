@@ -2,6 +2,7 @@
 #############
 ### dev
 #############
+#cannot install from alpine directly pywatchman==1.4.1 # for dev autoreload
 django-livereload-server # for dev
 django-debug-toolbar==1.11 # for dev
 #############

@@ -1,0 +1,8 @@
+FROM python:3.7-alpine3.8
+MAINTAINER banxi1988@gmail.com
+ENV PYTHONUNBUFFERED 1
+WORKDIR /opt
+ADD requirements/dev.txt /opt/
+RUN pip install -r dev.txt
+COPY . /opt
+
