@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'wepost.base.middleware.AuthTokenAwareSessionMiddleware',
     'django.middleware.common.CommonMiddleware',
