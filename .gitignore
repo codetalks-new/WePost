@@ -137,3 +137,5 @@ dist.tar.gz
 
 test_db.sqlite3
 playground.*
+
+*.tmp/

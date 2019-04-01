@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.8
+FROM python:3.7-alpine3.9
 MAINTAINER banxi1988@gmail.com
 ENV PYTHONUNBUFFERED 1
 WORKDIR /opt
