@@ -78,3 +78,73 @@ how?
 1. `docker network create <mynetworkname>
 2. `docker create --net` or `docker run --net`
 3. redis 主从架构单机容器网络配置
+
+## Docker 实践 (6) docker-machine 及简单应用
+
+> by 代码会说话
+
+### 需求
+
+为多机 Docker 宿主机相关实验做准备。
+
+### 解决方案
+
+使用 Docker Machine.
+
+1. Docker Machine 封装了配置外部宿主机的指令。
+2. Docker Machine 不是集群解决方案
+
+默认支持驱动主要有：
+Amazon Web Services
+Microsoft Azure
+Digital Ocean
+Exoscale
+Google Compute Engine
+Microsoft Hyper-V
+OpenStack
+Rackspace
+IBM Softlayer
+Oracle VirtualBox
+VMware vCloud Air
+VMware Fusion
+VMware vSphere
+第三方插件：
+https://github.com/docker/docker.github.io/blob/master/machine/AVAILABLE_DRIVER_PLUGINS.md
+
+### 创建 VirtualBox 虚拟机
+
+1. 确认已经安装 VirtualBox
+
+2. 创建 `docker-machine create --driver virtualbox <NAME>`
+   > Tip: boot2docker.iso 可以自己先行下载放到缓存目录，以免执行命令时下载失败。
+
+我的命名，以港口命名。
+
+```
+➜  ~ docker-machine create --driver virtualbox beihai
+Running pre-create checks...
+(beihai) Default Boot2Docker ISO is out-of-date, downloading the latest release...
+(beihai) Latest release for github.com/boot2docker/boot2docker is v18.09.4
+(beihai) Downloading /Users/banxi/.docker/machine/cache/boot2docker.iso from https://github.com/boot2docker/boot2docker/releases/download/v18.09.4/boot2docker.iso...
+(beihai) 0%....10%....20%....30%....40%....50%....60%....70%....80%....90%....100%
+Creating machine...
+(beihai) Copying /Users/banxi/.docker/machine/cache/boot2docker.iso to /Users/banxi/.docker/machine/machines/beihai/boot2docker.iso...
+(beihai) Creating VirtualBox VM...
+(beihai) Creating SSH key...
+(beihai) Starting the VM...
+(beihai) Check network to re-create if needed...
+(beihai) Waiting for an IP...
+Waiting for machine to be running, this may take a few minutes...
+Detecting operating system of created instance...
+Waiting for SSH to be available...
+Detecting the provisioner...
+Provisioning with boot2docker...
+Copying certs to the local machine directory...
+Copying certs to the remote machine...
+Setting Docker configuration on the remote daemon...
+Checking connection to Docker...
+Docker is up and running!
+To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env beihai
+```
+
+C/S
